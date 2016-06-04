@@ -1,5 +1,5 @@
 post_install() {
-echo -e "Enable and start the service. Replace “myuser” with the actual Syncthing user after the @:\n-----------------------------------------\nsystemctl enable syncthing@myuser.service\nsystemctl start syncthing@myuser.service\n-----------------------------------------\nThe admin GUI starts automatically and remains available on https://localhost:8384/"
+echo -e "Enable and start the service. Replace “myuser” with the actual Syncthing user after the @:\n-----------------------------------------\nsystemctl enable syncthing@myuser.service\nsystemctl start syncthing@myuser.service\n-----------------------------------------\nThe admin GUI starts automatically and remains available on http://localhost:8384/"
 }
 
 post_upgrade() {

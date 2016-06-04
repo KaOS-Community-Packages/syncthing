@@ -1,5 +1,5 @@
 pkgname=syncthing
-pkgver=0.13.4
+pkgver=0.13.5
 pkgrel=1
 pkgdesc="An open source continuous file synchronization"
 url="http://syncthing.net/"
@@ -8,8 +8,7 @@ license=('MPL2')
 category=Network
 screenshot=http://i.imgur.com/VWzG7V3.png
 source=("https://github.com/syncthing/syncthing/releases/download/v${pkgver}/syncthing-linux-amd64-v${pkgver}.tar.gz")
-md5sums=('f710609a7dd695445b79258125c8c3c7')
-
+md5sums=('5b594c559e78e1621f176a99d88ff61b')
 install=syncthing.install
 
 package() {
