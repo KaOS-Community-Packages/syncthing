@@ -2,7 +2,7 @@
 
 An open source continuous file synchronization
 
-[URL](http://syncthing.net/)
+[Homepage](http://syncthing.net/)
 
 Install:
 ```
