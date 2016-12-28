@@ -1,5 +1,5 @@
 pkgname=syncthing
-pkgver=0.14.16
+pkgver=0.14.17
 pkgrel=1
 pkgdesc="An open source continuous file synchronization"
 url="http://syncthing.net/"
@@ -9,12 +9,12 @@ category=Network
 screenshot=http://i.imgur.com/VWzG7V3.png
 source=("https://github.com/syncthing/syncthing/releases/download/v${pkgver}/syncthing-linux-amd64-v${pkgver}.tar.gz"
         "syncthing.install")
-md5sums=('130a461811ddff40d1709c37cf907ebc'
+md5sums=('8d8652845f4db0fa4770b5e225719f78'
          '0df66e20d84240d290b437df1749b51e')
 install=syncthing.install
 
 package() {
-   cd $pkgname-linux-amd64-v$pkgver
-   install -Dm755 $pkgname $pkgdir/usr/bin/$pkgname
-   install -Dm644 etc/linux-systemd/system/${pkgname}@.service $pkgdir/usr/lib/systemd/system/$pkgname@.service
+   cd $pkgname-linux-amd64-v${pkgver}
+   install -Dm755 ${pkgname} ${pkgdir}/usr/bin/${pkgname}
+   install -Dm644 etc/linux-systemd/system/${pkgname}@.service ${pkgdir}/usr/lib/systemd/system/${pkgname}@.service
 }
