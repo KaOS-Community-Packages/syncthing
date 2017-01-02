@@ -1,5 +1,5 @@
 pkgname=syncthing
-pkgver=0.14.17
+pkgver=0.14.18
 pkgrel=1
 pkgdesc="An open source continuous file synchronization"
 url="http://syncthing.net/"
@@ -9,7 +9,7 @@ category=Network
 screenshot=http://i.imgur.com/VWzG7V3.png
 source=("https://github.com/syncthing/syncthing/releases/download/v${pkgver}/syncthing-linux-amd64-v${pkgver}.tar.gz"
         "syncthing.install")
-md5sums=('8d8652845f4db0fa4770b5e225719f78'
+md5sums=('2f6a0c4a5193c829c06b6690b70d4809'
          '0df66e20d84240d290b437df1749b51e')
 install=syncthing.install
 
