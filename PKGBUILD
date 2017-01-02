@@ -10,7 +10,7 @@ screenshot=http://i.imgur.com/VWzG7V3.png
 source=("https://github.com/syncthing/syncthing/releases/download/v${pkgver}/syncthing-linux-amd64-v${pkgver}.tar.gz"
         "syncthing.install")
 md5sums=('2f6a0c4a5193c829c06b6690b70d4809'
-         '0df66e20d84240d290b437df1749b51e')
+         'd9cc0a619b0fa183da47afbe74d5523b')
 install=syncthing.install
 
 package() {
