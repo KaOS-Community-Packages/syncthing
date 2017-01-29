@@ -5,7 +5,8 @@ pkgdesc="An open source continuous file synchronization"
 url="http://syncthing.net/"
 arch=('x86_64')
 license=('MPL2')
-category=Network
+depends=('glibc')
+makedepends=('go')
 source=("https://github.com/syncthing/syncthing/archive/v${pkgver}.tar.gz")
 md5sums=('e41ff22640010bd3b8c3682e70a4d40f')
 install=syncthing.install
@@ -33,13 +34,15 @@ package(){
     install -Dm644 LICENSE ${pkgdir}/usr/share/licenses/${pkgname}/LICENSE
     
     cd man
+    
+    local file file1 file2
     for file in $(find . -name '*.1' -print); do
         install -Dm644 $file ${pkgdir}/usr/share/man/man1/$file
     done
-    for file in $(find . -name '*.5' -print); do
-        install -Dm644 $file ${pkgdir}/usr/share/man/man5/$file
+    for file1 in $(find . -name '*.5' -print); do
+        install -Dm644 $file ${pkgdir}/usr/share/man/man5/$file1
     done
-    for file in $(find . -name '*.7' -print); do
-        install -Dm644 $file ${pkgdir}/usr/share/man/man7/$file
+    for file2 in $(find . -name '*.7' -print); do
+        install -Dm644 $file ${pkgdir}/usr/share/man/man7/$file2
     done
 }
