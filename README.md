@@ -4,7 +4,7 @@ An open source continuous file synchronization
 
 [Homepage](http://syncthing.net/)
 
-Install:
+### Install:
 ```
 kcp -i syncthing
 ```
@@ -20,4 +20,3 @@ The *admin GUI* starts automatically and remains available on
 https://localhost:8384/
 
 ![alt tag](http://i.imgur.com/VWzG7V3.png)
-
