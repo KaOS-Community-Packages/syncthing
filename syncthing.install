@@ -1,7 +1,43 @@
+#!/bin/bash
+
+desktop=$(ps -e | grep kwin)
+timestamp=$( date +%F-%T )
+
 post_install() {
-echo -e "Enable and start the service. Replace “myuser” with the actual Syncthing user after the @:\n-----------------------------------------\nsystemctl enable syncthing@myuser.service\nsystemctl start syncthing@myuser.service\n-----------------------------------------\nThe admin GUI starts automatically and remains available on http://localhost:8384/"
+
+    if [[ -n ${desktop} ]]; then
+
+        kdialog --yesno "To enable and start the service. Replace 'myuser' with the actual Syncthing user after the @:<br>systemctl enable syncthing@myuser.service<br>systemctl start syncthing@myuser.service<br><br>The admin GUI starts automatically and remains available on http://localhost:8384/<br><br>Do you want to save this output?"
+
+        save=${?}
+
+        if [[ ${save} == 1 ]]; then
+
+            kdialog --msgbox "Output not saved"
+
+        else
+
+            echo -e "To enable and start the service. Replace 'myuser' with the actual Syncthing user after the @:\n-----------------------------------------\nsystemctl enable syncthing@myuser.service\nsystemctl start syncthing@myuser.service\n-----------------------------------------\nThe admin GUI starts automatically and remains available on http://localhost:8384/" > /var/log/syncthing_install_${timestamp}.txt
+
+            kdialog --msgbox "Output is saved in /var/log/syncthing_install_${timestamp}.txt"
+            
+        fi   
+
+    else
+
+        echo -e "To enable and start the service. Replace 'myuser' with the actual Syncthing user after the @:\n-----------------------------------------\nsystemctl enable syncthing@myuser.service\nsystemctl start syncthing@myuser.service\n-----------------------------------------\nThe admin GUI starts automatically and remains available on http://localhost:8384/"
+
+    fi
 }
 
 post_upgrade() {
-    echo -e "In order to load the updated version of syncthing it's necessary to restart the service\n-----------------------------------------\nsystemctl daemon-reload\nsystemctl restart syncthing@myuser.service\n-----------------------------------------\nReplace “myuser” with the actual Syncthing user"
+    if [[ -n ${desktop} ]]; then
+
+        kdialog --yesno "In order to load the updated version of syncthing it's necessary ro use 'systemctl daemon-reload' then restart the service"
+
+    else
+
+        echo -e "In order to load the updated version of syncthing it's necessary to restart the service\n-----------------------------------------\nsystemctl daemon-reload\nsystemctl restart syncthing@myuser.service\n-----------------------------------------\nReplace “myuser” with the actual Syncthing user"
+
+    fi
 }
