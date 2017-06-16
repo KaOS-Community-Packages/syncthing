@@ -1,5 +1,5 @@
 pkgname=syncthing
-pkgver=0.14.29
+pkgver=0.14.30
 pkgrel=1
 pkgdesc="An open source continuous file synchronization"
 url="http://syncthing.net/"
@@ -9,7 +9,7 @@ depends=('glibc')
 makedepends=('go')
 github_src="src/github.com/syncthing"
 source=("https://github.com/syncthing/syncthing/archive/v${pkgver}.tar.gz")
-md5sums=('df592a995be7788ca8c7b4004eff56f9')
+md5sums=('8ba4e88387332f2ba9f4097194d09d08')
 install=syncthing.install
 
 prepare() {
