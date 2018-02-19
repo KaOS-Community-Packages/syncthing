@@ -1,15 +1,14 @@
 pkgname=syncthing
-pkgver=0.14.43
+pkgver=0.14.44
 pkgrel=1
 pkgdesc="An open source continuous file synchronization"
 url="http://syncthing.net/"
 arch=('x86_64')
 license=('MPL2')
-depends=('glibc')
 makedepends=('go')
 github_src="src/github.com/syncthing"
 source=("https://github.com/syncthing/syncthing/archive/v${pkgver}.tar.gz")
-md5sums=('0093c3db5e3bc66d20449dfb787a3af4')
+md5sums=('e052e8657df22035300501005936377f')
 install=syncthing.install
 
 prepare() {
@@ -18,7 +17,7 @@ prepare() {
 }
 
 build() {
-    export GOPATH="$srcdir"
+    export GOPATH=${srcdir}
     export PATH=$PATH:$GOROOT/bin
         
     cd ${github_src}/${pkgname}
@@ -36,12 +35,12 @@ package(){
     
     local file file1 file2
     for file in $(find . -name '*.1' -print); do
-        install -Dm644 $file ${pkgdir}/usr/share/man/man1/$file
+        install -Dm644 $file ${pkgdir}/usr/share/man/man1/${file}
     done
     for file1 in $(find . -name '*.5' -print); do
-        install -Dm644 $file ${pkgdir}/usr/share/man/man5/$file1
+        install -Dm644 $file ${pkgdir}/usr/share/man/man5/${file1}
     done
     for file2 in $(find . -name '*.7' -print); do
-        install -Dm644 $file ${pkgdir}/usr/share/man/man7/$file2
+        install -Dm644 $file ${pkgdir}/usr/share/man/man7/${file2}
     done
 }
