@@ -1,6 +1,5 @@
-
 pkgname=syncthing
-pkgver=1.7.0
+pkgver=1.7.1
 pkgrel=1
 pkgdesc="An open source continuous file synchronization"
 url="http://syncthing.net/"
@@ -9,7 +8,7 @@ license=('MPL2')
 makedepends=('go')
 github_src="src/github.com/syncthing"
 source=("https://github.com/syncthing/syncthing/archive/v${pkgver}.tar.gz")
-md5sums=('1ce879189bea28b2e884b8e5b4ee2f15')
+md5sums=('b940d4b43024b183b6645f1944634cee')
 install=syncthing.install
 
 prepare() {
@@ -20,7 +19,7 @@ prepare() {
 build() {
     export GOPATH=${srcdir}
     export PATH=$PATH:$GOROOT/bin
-
+        
     cd ${github_src}/${pkgname}
     go run build.go -version v${pkgver}
 }
@@ -31,9 +30,9 @@ package(){
     install -Dm644 etc/linux-systemd/system/${pkgname}@.service ${pkgdir}/usr/lib/systemd/system/${pkgname}@.service
     install -Dm644 etc/linux-systemd/user/${pkgname}.service ${pkgdir}/usr/lib/systemd/user/${pkgname}.service
     install -Dm644 LICENSE ${pkgdir}/usr/share/licenses/${pkgname}/LICENSE
-
+    
     cd man
-
+    
     local file file1 file2
     for file in $(find . -name '*.1' -print); do
         install -Dm644 $file ${pkgdir}/usr/share/man/man1/${file}
