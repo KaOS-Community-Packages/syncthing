@@ -1,5 +1,5 @@
 pkgname=syncthing
-pkgver=1.18.0
+pkgver=1.18.1
 pkgrel=1
 pkgdesc="An open source continuous file synchronization"
 url="http://syncthing.net/"
@@ -8,7 +8,7 @@ license=('MPL2')
 makedepends=('go')
 github_src="src/github.com/syncthing"
 source=("https://github.com/syncthing/syncthing/archive/v${pkgver}.tar.gz")
-md5sums=('8ec44f3a0fa3c51e5eb454859386c177')
+md5sums=('1fac18e39a1d40fc04f606dd9d5ce9ab')
 install=syncthing.install
 
 prepare() {
@@ -22,7 +22,7 @@ build() {
     export PATH=$PATH:$GOROOT/bin
         
     cd ${github_src}/${pkgname}
-    go run build.go -version v${pkgver}
+    go run build.go -version v${pkgver} -no-upgrade #-with-next-gen-gui
 }
 
 package(){
