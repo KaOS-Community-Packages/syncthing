@@ -1,20 +1,29 @@
 pkgname=syncthing
 pkgver=1.23.1
-pkgrel=1
+pkgrel=2
 pkgdesc="An open source continuous file synchronization"
 url="http://syncthing.net/"
 arch=('x86_64')
 license=('MPL2')
 makedepends=('go')
 github_src="src/github.com/syncthing"
-source=("https://github.com/syncthing/syncthing/archive/v${pkgver}.tar.gz")
-md5sums=('b30ab4ff99727c05c437784822860f4d')
+source=("https://github.com/syncthing/syncthing/archive/v${pkgver}.tar.gz"
+        "go-quic.patch")
+md5sums=('b30ab4ff99727c05c437784822860f4d'
+         '6b77cfd4e04c2466c3b4d774af4aee4e')
 install=syncthing.install
 
 prepare() {
+    echo "Directorio actual"
+    pwd
     install -d ${github_src}
     mv ${pkgname}-${pkgver} ${github_src}/${pkgname}
     cd "${srcdir}/src/github.com/syncthing/${pkgbase}"
+
+    sed -e 's/lucas\-clemente\/quic\-go/quic\-go\/quic\-go/g' \
+        -i lib/connections/quic_dial.go -i lib/connections/quic_listen.go \
+        -i lib/connections/quic_misc.go
+    patch -Np1 -i "${srcdir}/go-quic.patch"
 }
 
 build() {
@@ -22,7 +31,7 @@ build() {
     export PATH=$PATH:$GOROOT/bin
         
     cd ${github_src}/${pkgname}
-    go run build.go -version v${pkgver} -no-upgrade #-with-next-gen-gui
+    go run build.go -version v${pkgver} -no-upgrade
 }
 
 package(){
