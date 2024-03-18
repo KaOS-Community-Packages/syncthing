@@ -6,7 +6,7 @@ timestamp=$( date +%F-%T )
 post_install() {
 
     if [[ -n ${desktop} ]]; then
-        KDE_SESSION_VERSION=5 KDE_FULL_SESSION=true  kdialog --yesno "To enable and start the service. Replace 'myuser' with the actual Syncthing user after the @:<br>systemctl enable syncthing@myuser.service<br>systemctl start syncthing@myuser.service<br><br>The admin GUI starts automatically and remains available on http://localhost:8384/<br><br>Do you want to save this output?"
+        KDE_SESSION_VERSION=6 KDE_FULL_SESSION=true  kdialog --yesno "To enable and start the service globally, replace 'myuser' with the actual Syncthing user after the @:<br>systemctl enable --now syncthing@myuser.service<br><br>Or enable locally with:<br>systemctl --user enable --now syncthing<br><br>The admin GUI starts automatically and remains available on http://localhost:8384/<br><br>Do you want to save this output?"
 
         save=${?}
 
@@ -16,7 +16,7 @@ post_install() {
 
         else
 
-            echo -e "To enable and start the service. Replace 'myuser' with the actual Syncthing user after the @:\n-----------------------------------------\nsystemctl enable syncthing@myuser.service\nsystemctl start syncthing@myuser.service\n-----------------------------------------\nThe admin GUI starts automatically and remains available on http://localhost:8384/" > /var/log/syncthing_install_${timestamp}.txt
+            echo -e "To enable and start the service globally, replace 'myuser' with the actual Syncthing user after the @:\n-----------------------------------------\nsystemctl enable --now syncthing@myuser.service\n-----------------------------------------\n\nOr enable locally with:\n-----------------------------------------\nsystemctl --user enable --now syncthing\n-----------------------------------------\n\nThe admin GUI starts automatically and remains available on http://localhost:8384/" > /var/log/syncthing_install_${timestamp}.txt
 
             kdialog --msgbox "Output is saved in /var/log/syncthing_install_${timestamp}.txt"
             
@@ -24,7 +24,7 @@ post_install() {
 
     else
 
-        echo -e "To enable and start the service. Replace 'myuser' with the actual Syncthing user after the @:\n-----------------------------------------\nsystemctl enable syncthing@myuser.service\nsystemctl start syncthing@myuser.service\n-----------------------------------------\nThe admin GUI starts automatically and remains available on http://localhost:8384/"
+        echo -e "To enable and start the service globally, replace 'myuser' with the actual Syncthing user after the @:\n-----------------------------------------\nsystemctl enable --now syncthing@myuser.service\n-----------------------------------------\n\nOr enable locally with:\n-----------------------------------------\nsystemctl --user enable --now syncthing\n-----------------------------------------\n\nThe admin GUI starts automatically and remains available on http://localhost:8384/"
 
     fi
 }
@@ -32,11 +32,11 @@ post_install() {
 post_upgrade() {
     if [[ -n ${desktop} ]]; then
         
-        KDE_SESSION_VERSION=5 KDE_FULL_SESSION=true kdialog --yesno "In order to load the updated version of syncthing it's necessary ro use 'systemctl daemon-reload' then restart the service"
+        KDE_SESSION_VERSION=6 KDE_FULL_SESSION=true kdialog --yesno "In order to load the updated version of syncthing it's necessary to use:<br><br>(globally) 'systemctl daemon-reload'<br><br>Or (locally) 'systemctl --user daemon-reload'<br><br>Then restart the service"
 
     else
 
-        echo -e "In order to load the updated version of syncthing it's necessary to restart the service\n-----------------------------------------\nsystemctl daemon-reload\nsystemctl restart syncthing@myuser.service\n-----------------------------------------\nReplace “myuser” with the actual Syncthing user"
+        echo -e "In order to load the updated version of syncthing it's necessary to restart the service\n-----------------------------------------\nGlobally: systemctl daemon-reload\nLocally: systemctl --user daemon-reload syncthing@myuser.service\n-----------------------------------------\n then restart the service"
 
     fi
 }
