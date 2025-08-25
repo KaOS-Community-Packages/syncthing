@@ -1,5 +1,5 @@
 pkgname=syncthing
-pkgver=1.30.0
+pkgver=2.0.3
 pkgrel=1
 pkgdesc="An open source continuous file synchronization"
 url="http://syncthing.net/"
@@ -7,8 +7,10 @@ arch=('x86_64')
 license=('MPL2')
 makedepends=('go')
 github_src="src/github.com/syncthing"
-source=("https://github.com/syncthing/syncthing/archive/v${pkgver}.tar.gz")
-md5sums=('01f66170d096c7cc78ea2a05c73bebb8')
+source=("https://github.com/syncthing/syncthing/archive/v${pkgver}.tar.gz"
+       "changelog.md")
+md5sums=('c52dd5f808eac8c5d6c65e35a1123497'
+         '95067028a2eac001faeaeb87bd1c550c')
 install=syncthing.install
 
 prepare() {
@@ -27,10 +29,12 @@ build() {
 
 package(){
     cd ${srcdir}/${github_src}/${pkgname}
+    install -dm 755 ${pkgdir}/usr/share/${pkgname}
     install -Dm755 bin/${pkgname} ${pkgdir}/usr/bin/${pkgname}
     install -Dm644 etc/linux-systemd/system/${pkgname}@.service ${pkgdir}/usr/lib/systemd/system/${pkgname}@.service
     install -Dm644 etc/linux-systemd/user/${pkgname}.service ${pkgdir}/usr/lib/systemd/user/${pkgname}.service
     install -Dm644 LICENSE ${pkgdir}/usr/share/licenses/${pkgname}/LICENSE
+    install -Dm644 ${srcdir}/changelog.md ${pkgdir}/usr/share/${pkgname}/CHANGELOG.md
     
     cd man
     
